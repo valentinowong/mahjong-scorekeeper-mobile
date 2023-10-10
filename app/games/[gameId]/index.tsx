@@ -1,6 +1,7 @@
 import { Pressable, Text, View } from 'react-native';
 import { Link, Stack, useLocalSearchParams } from 'expo-router';
 import { styles } from '../../styles';
+import { Button } from '@rneui/base';
 
 export default function gameDetailsScreen() {
     const params = useLocalSearchParams();
@@ -18,10 +19,9 @@ export default function gameDetailsScreen() {
                 href={{
                 pathname: "/games/[gameId]/edit",
                 params: { gameId: '100' }
-                }}>
-                    <Pressable style={styles.button}>
-                        <Text>Edit Game</Text>
-                    </Pressable>
+                }}
+                asChild>
+                    <Button size="md">Edit Game</Button>
             </Link>
         </View>
   );

@@ -1,6 +1,7 @@
 import { Pressable, Text, View } from 'react-native';
 import { Link, Stack, useLocalSearchParams } from 'expo-router';
 import { styles } from '../styles';
+import { Button } from '@rneui/base';
 
 export default function SessionDetails() {
     const params = useLocalSearchParams()
@@ -18,10 +19,9 @@ export default function SessionDetails() {
             pathname: "/games/[gameId]",
             params: { gameId: '100' }
           }}
+          asChild
         >
-            <Pressable style={styles.button}>
-                <Text>Game 100</Text>
-            </Pressable>
+            <Button size="md">Game 100</Button>
       </Link>
     </View>
   );

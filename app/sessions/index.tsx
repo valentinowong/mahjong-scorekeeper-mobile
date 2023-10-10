@@ -1,6 +1,7 @@
 import { Pressable, Text, View } from 'react-native';
 import { Link, Stack } from 'expo-router';
 import { styles } from '../styles';
+import { Button } from '@rneui/base';
 
 
 export default function SessionsScreen() {
@@ -17,10 +18,9 @@ export default function SessionsScreen() {
         href={{
           pathname: "/sessions/[sessionId]",
           params: { sessionId: '50' }
-        }}>
-            <Pressable style={styles.button}>
-                <Text>Session 50</Text>
-            </Pressable>
+        }}
+        asChild>
+            <Button size="md">Session 50</Button>
       </Link>
     </View>
   );

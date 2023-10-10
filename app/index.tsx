@@ -1,9 +1,12 @@
 import { Pressable, Text, View, SafeAreaView } from 'react-native';
-import { Link, Stack } from 'expo-router';
+import { Link, Stack, useRouter } from 'expo-router';
 import { styles } from './styles';
+import { Button } from '@rneui/base';
 
 export default function Home() {
-  return (
+    const navigation = useRouter();
+  
+    return (
     <SafeAreaView>
         <Stack.Screen 
             options={{
@@ -12,11 +15,10 @@ export default function Home() {
         />
         <Text>This is the Home page</Text>
         <Text>Tests</Text>
-        <Link href="/sessions">
-            <Pressable style={styles.button}>
-                <Text >Sessions</Text>
-            </Pressable>
+        <Link href="/sessions" asChild>
+            <Button size="md">Sessions</Button>
         </Link>
+        
         
     </SafeAreaView>
   );
