@@ -1,7 +1,7 @@
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Stack, useGlobalSearchParams } from 'expo-router';
 import { useReducer } from 'react';
-import Bundle  from "../src/appState";
-const { AppContext, appReducer, initialState } = Bundle
+import { AppContext, appReducer, initialState } from "./appState"
 
 export default function Layout() {
     const [state, dispatch] = useReducer(appReducer, initialState);
@@ -27,6 +27,9 @@ export default function Layout() {
                     }}
                 />
             </Stack>
+            <SafeAreaView>
+
+            </SafeAreaView>
         </AppContext.Provider>
   );
 }

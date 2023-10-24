@@ -2,8 +2,7 @@ import { Pressable, Text, View, SafeAreaView } from 'react-native';
 import { Link, Stack, router } from 'expo-router';
 import { styles } from './styles';
 import { Button } from '@rneui/base';
-import Bundle from "../src/appState";
-const {type, AppContext} = Bundle;
+import {type, AppContext} from './appState';
 import { useContext } from 'react';
 
 export default function Home() {

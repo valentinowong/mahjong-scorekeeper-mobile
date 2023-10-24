@@ -3,7 +3,7 @@ import initialState from "./initialState";
 import type from "./actions";
 import appReducer from "./appReducer";
 
-export default {
+export {
     AppContext,
     initialState,
     type,
