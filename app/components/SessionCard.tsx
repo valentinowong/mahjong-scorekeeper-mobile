@@ -4,7 +4,7 @@ import { sessionPlayers, playerSessionScore } from '../appState/logic';
 
 const SessionCard = ({id}) => {
 
-    const PlayerScores = () => {
+    const PlayersScores = () => {
         return sessionPlayers(id).map( (player) => {
             return <Text key={player.id}>{player.name}: {playerSessionScore(player.id, id)}</Text>
         })
@@ -16,7 +16,7 @@ const SessionCard = ({id}) => {
                 Session {id}
             </Card.Title>
             <Card.Divider/>
-            <PlayerScores/>            
+            <PlayersScores/>   
         </Card>
     )
 }

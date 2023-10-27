@@ -56,4 +56,10 @@ const playerName = ( playerId ) => {
     return player.name;
 }
 
-export { sessionGames, sessionPlayers, playerSessionScore, playerName };
+const playerInitials = ( playerId ) => {
+    const words = playerName( playerId ).split(' ');
+    return words.map( (word) => word[0]).join('');
+
+}
+
+export { sessionGames, sessionPlayers, playerSessionScore, playerName, playerInitials };

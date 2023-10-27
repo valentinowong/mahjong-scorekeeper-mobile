@@ -27,7 +27,7 @@ export default function SessionsScreen() {
     <View>
       <Stack.Screen 
         options={{
-          title: "Sessions"
+          title: "My Sessions"
         }}
       />
       <ScrollView>

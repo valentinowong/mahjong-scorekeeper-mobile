@@ -12,6 +12,7 @@ export default {
         {
             id: 1,
             sessionId: 1,
+            editable: false,
             scores: [
                 {
                     playerId: 1,

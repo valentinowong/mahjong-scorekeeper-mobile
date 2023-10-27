@@ -22,7 +22,7 @@ export default function Home() {
                     size="md" 
                     onPress={ () => router.push( { pathname: "/sessions"} )}
                 >
-                    Sessions
+                    My Sessions
                 </Button>
             <Text>---</Text>
             <Text>{count}</Text>
