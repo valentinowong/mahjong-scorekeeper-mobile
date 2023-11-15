@@ -1,5 +1,4 @@
 export default {
-    count: 0,
     sessions: [
         {
             id: 1,
@@ -12,7 +11,6 @@ export default {
         {
             id: 1,
             sessionId: 1,
-            editable: false,
             scores: [
                 {
                     playerId: 1,
@@ -693,6 +691,7 @@ export default {
             ]
         },
     ],
+    newGame: {},
     players: [
         {
             id: 1, 
@@ -713,6 +712,8 @@ export default {
         {
             id: 5,
             name: "Mama Koo",
-        }
-    ]
+        },
+    ], 
+    selectedPlayers: [],
+
 };

@@ -24,10 +24,6 @@ export default function Home() {
                 >
                     My Sessions
                 </Button>
-            <Text>---</Text>
-            <Text>{count}</Text>
-            <Button onPress={() => dispatch(type.add(2))}>Add</Button>
-            <Button onPress={() => dispatch(type.sub(2))}>Subtract</Button>
         </SafeAreaView>
   );
 }

@@ -13,6 +13,10 @@ export default function SessionsScreen() {
   const { state, dispatch } = useContext(AppContext);
   const { sessions, games, players } = state; 
 
+  const newSession = () => {
+
+  };
+  
   const SessionCards = () => {
     return sessions.map( (session) => {
       return (
@@ -23,11 +27,20 @@ export default function SessionsScreen() {
     })
   }
 
+  console.log(state.sessions)
   return (
     <View>
       <Stack.Screen 
         options={{
-          title: "My Sessions"
+          title: "My Sessions",
+          headerRight: () => (
+            <Button
+                title="New Session"
+                onPress={ () => dispatch(type.newSession())}
+                titleStyle={{fontWeight: 'bold', color: "white"}}
+                type="clear"
+            />
+          ),
         }}
       />
       <ScrollView>

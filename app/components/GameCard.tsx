@@ -12,7 +12,7 @@ const GameCard = ({id}) => {
     const PlayersScores = () => {
         const game = games.find((game) => game.id === id)
         return game.scores.map( (score) => {
-            return <Text key={score.playerId}>{playerName(score.playerId)}: {score.score}</Text>
+            return <Text key={score.playerId}>{playerName(score.playerId, players)}: {score.score}</Text>
         })
     }
     

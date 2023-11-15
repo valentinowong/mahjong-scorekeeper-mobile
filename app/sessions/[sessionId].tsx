@@ -2,13 +2,17 @@ import { Pressable, Text, View } from 'react-native';
 import { Stack, useLocalSearchParams, router } from 'expo-router';
 import { Button, Card } from '@rneui/base';
 import GameCard from '../components/GameCard';
-import PlayersCard from '../components/PlayerScore';
 import { ScrollView } from 'react-native-gesture-handler';
 import { sessionGames, sessionPlayers, playerSessionScore } from '../appState/logic';
 import PlayerScore from '../components/PlayerScore';
+import { useContext } from "react";
+import {type, AppContext} from "../appState";
 
 export default function SessionDetails() {
   const params = useLocalSearchParams();  
+
+  const { state, dispatch } = useContext(AppContext);
+  const { sessions, games, players } = state; 
     
   const PlayersScores = () => {
     return sessionPlayers(Number(params.sessionId)).map( (player) => {
@@ -31,11 +35,28 @@ export default function SessionDetails() {
       })
     }
 
+    const createNewGame = () => {
+      dispatch(type.newGame({
+          id: games.length + 1,
+          sessionId: Number(params.sessionId),
+          scores: []
+      }));
+      router.push( { pathname: "/games/new", params: {sessionId: params.sessionId} })
+    }
+
     return (
     <View>
         <Stack.Screen 
             options={{
-                title: `Session ${params.sessionId}`
+                title: `Session ${params.sessionId}`,
+                headerRight: () => (
+                  <Button
+                      title="New Game"
+                      onPress={ () => createNewGame()}
+                      titleStyle={{fontWeight: 'bold', color: "white"}}
+                      type="clear"
+                  />
+                ),
             }}
         />
         <ScrollView>

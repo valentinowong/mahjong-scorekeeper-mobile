@@ -48,18 +48,14 @@ const playerSessionScore = (playerId, sessionId) => {
     return totalScore;
 }
 
-const playerName = ( playerId ) => {
-    const { state, dispatch } = useContext(AppContext);
-    const { sessions, games, players } = state; 
-    
+const playerName = ( playerId, players ) => {
     const player = players.find( (player) => player.id === playerId);
     return player.name;
 }
 
-const playerInitials = ( playerId ) => {
-    const words = playerName( playerId ).split(' ');
+const playerInitials = ( playerId, players ) => {
+    const words = playerName( playerId, players ).split(' ');
     return words.map( (word) => word[0]).join('');
-
 }
 
 export { sessionGames, sessionPlayers, playerSessionScore, playerName, playerInitials };
