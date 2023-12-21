@@ -6,10 +6,10 @@ import {type, AppContext} from "../appState";
 
 const EditPlayerScore = ({ playerId, score, players }) => {
     const { state, dispatch } = useContext(AppContext);
-    const { sessions, games, newGame } = state; 
+    const { sessions, games, selectedGame } = state; 
 
     const changeScore = (playerId, change) => {
-        const updatedScores = newGame.scores.map( (score => {
+        const updatedScores = selectedGame.scores.map( (score => {
             if (score.playerId === playerId) {
                 return {
                     playerId: playerId,
@@ -19,8 +19,8 @@ const EditPlayerScore = ({ playerId, score, players }) => {
                 return score
             }
         }))
-        dispatch(type.updateNewGame({
-            ...newGame,
+        dispatch(type.updateSelectedGame({
+            ...selectedGame,
             scores: updatedScores,
         }));
     }

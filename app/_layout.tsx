@@ -1,13 +1,25 @@
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Stack, useGlobalSearchParams, router } from 'expo-router';
 import { useReducer } from 'react';
-import { AppContext, appReducer, initialState } from "./appState"
+import { AppContext, appReducer, initialState, type } from "./appState"
 import { Button } from '@rneui/base';
 
 export default function Layout() {
     const [state, dispatch] = useReducer(appReducer, initialState);
-    const { sessions, games, players } = state; 
+    const { sessions, games, players, selectedGame } = state; 
     const params = useGlobalSearchParams();
+
+    const editGame = () => {
+        const game = games.find( (game) => game.id === Number(params.gameId))
+        
+        dispatch(type.updateSelectedGame(game))
+        router.push( { pathname: "games/edit/[gameId]", params: { gameId: params.gameId }})
+    }
+
+    const saveGame = () => {
+        dispatch(type.saveSelectedGame(selectedGame))
+        router.back()
+    }
 
     return (
         <AppContext.Provider value={{ state, dispatch }}>
@@ -29,7 +41,33 @@ export default function Layout() {
                         headerRight: () => (
                             <Button
                                 title="Edit"
-                                onPress={ () => router.push( { pathname: "/games/[gameId]/edit", params: { gameId: params.gameId }})}
+                                onPress={ () => editGame() }
+                                buttonStyle={{
+                                    backgroundColor: "#17AD3F",
+                                }}
+                                titleStyle={{fontWeight: 'bold'}}
+                            />
+                        )
+                    }}
+                />
+                <Stack.Screen 
+                    name="games/edit/[gameId]"
+                    options={{
+                        headerTitle: `Edit Game ${params.gameId}`,
+                        headerRight: () => (
+                            <Button
+                                title="Save"
+                                onPress={ () => saveGame() }
+                                buttonStyle={{
+                                    backgroundColor: "#17AD3F",
+                                }}
+                                titleStyle={{fontWeight: 'bold'}}
+                            />
+                        ),
+                        headerLeft: () => (
+                            <Button
+                                title="Cancel"
+                                onPress={ () => router.back() }
                                 buttonStyle={{
                                     backgroundColor: "#17AD3F",
                                 }}

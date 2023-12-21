@@ -10,7 +10,7 @@ import { ListItemTitle } from "@rneui/base/dist/ListItem/ListItem.Title";
 export default function addPlayerScreen() {
     
     const { state, dispatch } = useContext(AppContext);
-    const { sessions, games, players, selectedPlayers } = state; 
+    const { sessions, games, players, selectedPlayers, selectedGame } = state; 
     
     console.log(players)
     console.log(selectedPlayers)
@@ -34,7 +34,21 @@ export default function addPlayerScreen() {
     }
 
     const addPlayersToGame = () => {
-        dispatch(type.updateNewGamePlayers())
+        const updatedScores = selectedGame.scores.filter( (score) => selectedPlayers.some( (player) => player.id === score.playerId))
+            selectedPlayers.forEach( (player) => {
+                if (!selectedGame.scores.some( (score) => score.playerId === player.id)) {
+                    updatedScores.push({ playerId: player.id, score: 0}) 
+                }
+            })
+        dispatch(type.updateSelectedGame({
+            ...selectedGame,
+            scores: updatedScores,
+        }));
+        router.back()
+    }
+
+    const cancelAddPlayers = () => {
+        dispatch(type.clearSelectedPlayers())
         router.back()
     }
 
@@ -54,7 +68,7 @@ export default function addPlayerScreen() {
                     headerLeft: () => (
                         <Button
                             title="Cancel"
-                            onPress={ () => router.back()}
+                            onPress={ () => cancelAddPlayers()}
                             titleStyle={{fontWeight: 'bold', color: "white"}}
                             type="clear"
                         />
@@ -74,15 +88,6 @@ export default function addPlayerScreen() {
                     Create New Player
                 </ListItemTitle>
             </ListItem>
-            {/* <Button
-                title="Create New Player"
-                titleStyle={{fontWeight: "bold"}}
-                containerStyle={{
-                    margin: 10,
-                    borderRadius: 5,
-                  }}
-                onPress={ () => router.push( { pathname: "/players/new"})}
-            /> */}
         </View>
     );
 }

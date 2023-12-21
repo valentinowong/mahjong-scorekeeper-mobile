@@ -32,30 +32,29 @@ const selectPlayer = (payload) => {
     }
 }
 
-const newGame = (payload) => {
+const clearSelectedPlayers = () => {
     return {
-        type: "newGame",
+        type: "clearSelectedPlayers",
+    }
+}
+
+const updateSelectedGame = (payload) => {
+    return {
+        type: "updateSelectedGame",
         payload,
     }
 }
 
-const updateNewGamePlayers = () => {
+const saveSelectedGame = (payload) => {
     return {
-        type: "updateNewGamePlayers",
-    }
-}
-
-const updateNewGame = (payload) => {
-    return {
-        type: "updateNewGame",
+        type: "saveSelectedGame",
         payload,
     }
 }
 
-const saveNewGame = (payload) => {
+const clearSelectedGame = () => {
     return {
-        type: "saveNewGame",
-        payload,
+        type: "clearSelectedGame",
     }
 }
 
@@ -65,8 +64,8 @@ export default {
     newSession,
     newPlayer,
     selectPlayer,
-    newGame,
-    updateNewGamePlayers,
-    updateNewGame,
-    saveNewGame,
+    clearSelectedPlayers,
+    updateSelectedGame,
+    saveSelectedGame,
+    clearSelectedGame,
 };

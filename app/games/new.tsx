@@ -9,7 +9,9 @@ export default function newGameScreen() {
     const params = useLocalSearchParams();
 
     const { state, dispatch } = useContext(AppContext);
-    const { sessions, games, players, newGame } = state; 
+    const { sessions, games, players, selectedGame } = state; 
+
+    console.log( selectedGame )
 
     function sortScoresByPlayerName(scores, players) {
         return scores.sort((a, b) => {
@@ -27,7 +29,7 @@ export default function newGameScreen() {
     }
 
     const PlayersScores = () => {
-        const sortedScores = sortScoresByPlayerName(newGame.scores, players)
+        const sortedScores = sortScoresByPlayerName(selectedGame.scores, players)
 
         return sortedScores.map( (score) => {
             return (
@@ -42,7 +44,12 @@ export default function newGameScreen() {
     }
 
     const saveGame = () => {
-        dispatch(type.saveNewGame(newGame))
+        dispatch(type.saveSelectedGame(selectedGame))
+        router.back()
+    }
+
+    const cancelNewGame = () => {
+        dispatch(type.clearSelectedGame())
         router.back()
     }
 
@@ -62,7 +69,7 @@ export default function newGameScreen() {
                     headerLeft: () => (
                         <Button
                             title="Cancel"
-                            onPress={ () => router.back()}
+                            onPress={ () => cancelNewGame()}
                             titleStyle={{fontWeight: 'bold', color: "white"}}
                             type="clear"
                         />
@@ -83,19 +90,6 @@ export default function newGameScreen() {
                     type="clear"
                     onPress={ () => router.push( { pathname: "/players/add"})}
                 />
-                {/* <Pressable onPress={ () => router.push( { pathname: "/players/add"})}>
-                    <View 
-                        style={{flexDirection: "row", justifyContent: "center", alignItems: "center", padding: 10}}
-                    >
-                        <Avatar 
-                            size={48}
-                            rounded
-                            title="+"
-                            containerStyle={{backgroundColor: "blue"}}
-                        />
-                        <Text h4>Add Players</Text>
-                    </View>
-                </Pressable> */}
             </Card>
         </View>
     )

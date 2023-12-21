@@ -7,7 +7,7 @@ export default function gameLayout() {
             <Stack.Screen 
                 name="edit"
                 options={{
-                    presentation:'modal',
+                    // presentation:'modal',
                     // headerShown: false,
                     headerRight: () => (
                         <Button

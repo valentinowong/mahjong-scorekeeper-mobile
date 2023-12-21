@@ -691,7 +691,7 @@ export default {
             ]
         },
     ],
-    newGame: {},
+    selectedGame: {},
     players: [
         {
             id: 1, 

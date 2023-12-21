@@ -15,7 +15,18 @@ export default function SessionDetails() {
   const { sessions, games, players } = state; 
     
   const PlayersScores = () => {
-    return sessionPlayers(Number(params.sessionId)).map( (player) => {
+    const sortedPlayers =  sessionPlayers(Number(params.sessionId)).sort((a, b) => {
+        if (a.name < b.name) {
+            return -1;
+        }
+        if (a.name > b.name) {
+            return 1;
+        }
+        return 0;
+      }
+    )
+    
+    return sortedPlayers.map( (player) => {
         return (
           <PlayerScore key={player.id} playerId={player.id} score={playerSessionScore(player.id,Number(params.sessionId))}/>
         )
@@ -36,11 +47,12 @@ export default function SessionDetails() {
     }
 
     const createNewGame = () => {
-      dispatch(type.newGame({
-          id: games.length + 1,
-          sessionId: Number(params.sessionId),
-          scores: []
-      }));
+      const newGame = {
+        id: games.length + 1,
+        sessionId: Number(params.sessionId),
+        scores: []
+    }
+      dispatch(type.updateSelectedGame(newGame));
       router.push( { pathname: "/games/new", params: {sessionId: params.sessionId} })
     }
 

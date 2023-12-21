@@ -5,7 +5,16 @@ import { sessionPlayers, playerSessionScore } from '../appState/logic';
 const SessionCard = ({id}) => {
 
     const PlayersScores = () => {
-        return sessionPlayers(id).map( (player) => {
+        const sortedPlayers = sessionPlayers(id).sort((a, b) => {
+            if (a.name < b.name) {
+                return -1;
+            }
+            if (a.name > b.name) {
+                return 1;
+            }
+        })
+        
+        return sortedPlayers.map( (player) => {
             return <Text key={player.id}>{player.name}: {playerSessionScore(player.id, id)}</Text>
         })
     }

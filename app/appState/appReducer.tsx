@@ -37,50 +37,54 @@ export default (state, action) => {
             }
             break;
         
-        case "newGame":
+        case "clearSelectedPlayers":
             return {
                 ...state,
-                newGame: action.payload
+                selectedPlayers: [],
             }
             break;
 
-        case "updateNewGamePlayers":
-            const updatedScores = state.newGame.scores.filter( (score) => state.selectedPlayers.some( (player) => player.id === score.playerId))
-            state.selectedPlayers.forEach( (player) => {
-                if (!state.newGame.scores.some( (score) => score.playerId === player.id)) {
-                    updatedScores.push({ playerId: player.id, score: 0}) 
-                }
-            })
+        case "updateSelectedGame":
             return {
                 ...state,
-                newGame: {
-                    ...state.newGame,
-                    scores: updatedScores,
-                }
-            }
-            break;
-
-        case "updateNewGame":
-            return {
-                ...state,
-                newGame: {
-                    ...state.newGame,
+                selectedGame: {
+                    ...state.selectedGame,
                     ...action.payload,
                 }
             }
             break;
 
-        case "saveNewGame":
+        case "saveSelectedGame":
+            let updatedGames = []
+            if (state.games.some( (game) => game.id === state.selectedGame.id)) {
+                updatedGames = state.games.map( (game) => {
+                    if (game.id === state.selectedGame.id) {
+                        return state.selectedGame
+                    } else {
+                        return game
+                    }
+                })
+            } else {
+                updatedGames = [
+                    ...state.games,
+                    state.selectedGame,
+                ]
+            }
             return {
                 ...state,
-                games: [
-                    ...state.games,
-                    state.newGame,
-                ],
-                newGame: {},
+                games: updatedGames,
+                selectedGame: {},
                 selectedPlayers: [],
             }
             
+        case "clearSelectedGame":
+            return {
+                ...state,
+                selectedGame: {},
+                selectedPlayers: [],
+            }
+            break;
+
         default:
             return state;
             break;
