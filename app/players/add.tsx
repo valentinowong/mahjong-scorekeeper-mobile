@@ -25,6 +25,9 @@ export default function addPlayerScreen() {
                 <ListItem bottomDivider key={player.id}>
                     <ListItemCheckBox
                         checked={selectedPlayers.includes(player)}
+                        iconType="material-community"
+                        checkedIcon="checkbox-marked"
+                        uncheckedIcon="checkbox-blank-outline"
                         onPress={() => selectPlayer(player)}
                     />
                     <ListItemTitle>{player.name}</ListItemTitle>
