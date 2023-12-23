@@ -12,7 +12,6 @@ export default function Home() {
 
     return (
         <SafeAreaView>
-            <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet"></link>
             <Stack.Screen 
                 options={{
                     title: "Home"

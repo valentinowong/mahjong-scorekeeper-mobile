@@ -11,6 +11,7 @@
     "deploy-hosting": "npm run predeploy && firebase deploy --only hosting"
   },
   "dependencies": {
+    "@expo/vector-icons": "^13.0.0",
     "@expo/webpack-config": "^19.0.0",
     "@rneui/base": "^4.0.0-rc.7",
     "@rneui/themed": "^4.0.0-rc.8",
