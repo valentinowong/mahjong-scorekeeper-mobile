@@ -29,6 +29,8 @@ const sessionPlayers = (sessionId) => {
     return playerIds.map((playerId) => {
         return players.find( (player) => player.id === playerId )
     })
+
+
 }
 
 const playerSessionScore = (playerId, sessionId) => {
