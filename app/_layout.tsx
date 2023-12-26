@@ -32,7 +32,6 @@ export default function Layout() {
                     headerTitleStyle: {
                         fontWeight: 'bold',
                     },
-                    // headerBackImageSource: require('../assets/back-icon.png'),
                 }}
             >  
                 <Stack.Screen 
